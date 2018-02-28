@@ -8,21 +8,24 @@ namespace TestMahApps
     public class MainViewModel : BindableBase
     {
         private RelayCommand _buttonClickCommand;
+
         public ICommand ButtonClickCommand
         {
             get
             {
-                return _buttonClickCommand ?? (_buttonClickCommand = new RelayCommand(delegate
-                        {
-                            MessageDialogResult result = MessageDialogResult.Negative;
-                            var task = MahControlsHelper.ShowMessage(Application.Current.MainWindow, $"Confirm Kicking Trader off", $"Are you sure you want to kick off Trader?", MessageDialogStyle.AffirmativeAndNegative);
-                            result = task.Result;
+                return _buttonClickCommand ?? (_buttonClickCommand = new RelayCommand(async obj =>
+                {
+                    var task = MahControlsHelper.ShowMessage(Application.Current.MainWindow,
+                        $"Confirm Kicking Trader off", $"Are you sure you want to kick off Trader?",
+                        MessageDialogStyle.AffirmativeAndNegative);
 
-                            if (result == MessageDialogResult.Affirmative)
-                            {
-                                Console.WriteLine("Success");
-                            }
-                        }));
+                    var result = await task;
+
+                    if (result == MessageDialogResult.Affirmative)
+                    {
+                        Console.WriteLine("Success");
+                    }
+                }));
             }
         }
     }

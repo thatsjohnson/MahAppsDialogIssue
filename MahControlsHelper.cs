@@ -7,20 +7,20 @@ namespace TestMahApps
 {
     public class MahControlsHelper
     {
-        public static async Task<MessageDialogResult> ShowMessageAsync(string title, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative, MetroDialogSettings settings = null)
+        public static Task<MessageDialogResult> ShowMessageAsync(string title, string message, MessageDialogStyle style = MessageDialogStyle.Affirmative, MetroDialogSettings settings = null)
         {
             var metroWindow = (Application.Current.MainWindow as MetroWindow);
             metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Theme;
 
-            return await metroWindow.ShowMessageAsync(title, message, style, settings);
+            return metroWindow.ShowMessageAsync(title, message, style, settings);
         }
 
-        public static async Task<MessageDialogResult> ShowMessage(Window window, string title, string message, MessageDialogStyle dialogStyle)
+        public static Task<MessageDialogResult> ShowMessage(Window window, string title, string message, MessageDialogStyle dialogStyle)
         {
             var metroWindow = (window as MetroWindow);
             metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
 
-            return await metroWindow.ShowMessageAsync(title, message, dialogStyle, metroWindow.MetroDialogOptions);
+            return metroWindow.ShowMessageAsync(title, message, dialogStyle, metroWindow.MetroDialogOptions);
         }
 
         //public static Task ShowChildWindowAsync(ChildWindow dialog, ChildWindowManager.OverlayFillBehavior overlayFillBehavior = ChildWindowManager.OverlayFillBehavior.WindowContent)
